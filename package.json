@@ -1,7 +1,7 @@
 {
   "name": "videojs-mpegts",
   "version": "0.2.0",
-  "description": "Video.js tech for FLV playback in MSE with flv.js",
+  "description": "Video.js tech using mpegts.js for MPEG2-TS/FLV playback",
   "main": "es5/plugin.js",
   "generator-videojs-plugin": {
     "version": "2.2.0"
@@ -34,9 +34,10 @@
   },
   "keywords": [
     "videojs",
-    "videojs-plugin"
+    "videojs-plugin",
+    "mpegts"
   ],
-  "author": "mister-ben <git@misterben.me>",
+  "author": "Saif Alaqqad <saif.w.alaqqad@gmail.com>",
   "contributors": [],
   "repository": {
     "type": "git",
