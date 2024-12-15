@@ -13,11 +13,11 @@ const defaults = {
 };
 
 /**
- * Flvjs tech that simply wires up fv.js to a Video.js tech
+ * Mpegts tech that simply wires up mpegts.js to a Video.js tech
  *
- * @see {@link https://github.com/bilibili/flv.js|flv.js}
+ * @see {@link https://github.com/xqq/mpegts.js|mpegts.js}
  */
-class Flvjs extends Html5 {
+class Mpegts extends Html5 {
 
   /**
    * Create an instance of this Tech.
@@ -26,7 +26,7 @@ class Flvjs extends Html5 {
    *        The key/value store of player options.
    *
    * @param {Component~ReadyCallback} ready
-   *        Callback function to call when the `Flvjs` Tech is ready.
+   *        Callback function to call when the `Mpegts` Tech is ready.
    */
   constructor(options, ready) {
     options = mergeOptions(defaults, options);
@@ -34,35 +34,35 @@ class Flvjs extends Html5 {
   }
 
   /**
-    * Setter for the `Flvjs` Tech's source object.
+    * Setter for the `Mpegts` Tech's source object.
     *
     * @param {Tech~SourceObject} [src]
-    *        The source object to set on the `Flvjs` techs.
+    *        The source object to set on the `Mpegts` techs.
     */
   setSrc(src) {
-    if (this.flvPlayer) {
+    if (this.mpegtsPlayer) {
       // Is this necessary to change source?
-      this.flvPlayer.detachMediaElement();
-      this.flvPlayer.destroy();
+      this.mpegtsPlayer.detachMediaElement();
+      this.mpegtsPlayer.destroy();
     }
 
     const mediaDataSource = this.options_.mediaDataSource;
     const config = this.options_.config;
 
-    mediaDataSource.type = mediaDataSource.type === undefined ? 'flv' : mediaDataSource.type;
+    mediaDataSource.type = mediaDataSource.type === undefined ? 'mpegts' : mediaDataSource.type;
     mediaDataSource.url = src;
-    this.flvPlayer = window.flvjs.createPlayer(mediaDataSource, config);
-    this.flvPlayer.attachMediaElement(this.el_);
-    this.flvPlayer.load();
+    this.mpegtsPlayer = window.mpegts.createPlayer(mediaDataSource, config);
+    this.mpegtsPlayer.attachMediaElement(this.el_);
+    this.mpegtsPlayer.load();
   }
 
   /**
-   * Dispose of flvjs.
+   * Dispose of mpegts.
    */
   dispose() {
-    if (this.flvPlayer) {
-      this.flvPlayer.detachMediaElement();
-      this.flvPlayer.destroy();
+    if (this.mpegtsPlayer) {
+      this.mpegtsPlayer.detachMediaElement();
+      this.mpegtsPlayer.destroy();
     }
     super.dispose();
   }
@@ -70,25 +70,26 @@ class Flvjs extends Html5 {
 }
 
 /**
- * Check if the Flvjs tech is currently supported.
+ * Check if the Mpegts tech is currently supported.
  *
  * @return {boolean}
- *          - True if the Flvjs tech is supported.
+ *          - True if the Mpegts tech is supported.
  *          - False otherwise.
  */
-Flvjs.isSupported = function() {
+Mpegts.isSupported = function() {
 
-  return window.flvjs && window.flvjs.isSupported();
+  return window.mpegts && window.mpegts.isSupported();
 };
 
 /**
- * Flvjs supported mime types.
+ * Mpegts supported mime types.
  *
  * @constant {Object}
  */
-Flvjs.formats = {
+Mpegts.formats = {
   'video/flv': 'FLV',
-  'video/x-flv': 'FLV'
+  'video/x-flv': 'FLV',
+  'video/mp2t': 'MPEGTS'
 };
 
 /**
@@ -98,8 +99,8 @@ Flvjs.formats = {
  *        The mimetype to check
  * @return {string} 'probably', 'maybe', or '' (empty string)
  */
-Flvjs.canPlayType = function(type) {
-  if (Flvjs.isSupported() && type in Flvjs.formats) {
+Mpegts.canPlayType = function(type) {
+  if (Mpegts.isSupported() && type in Mpegts.formats) {
     return 'maybe';
   }
 
@@ -115,13 +116,13 @@ Flvjs.canPlayType = function(type) {
  *        The options passed to the tech
  * @return {string} 'probably', 'maybe', or '' (empty string)
  */
-Flvjs.canPlaySource = function(srcObj, options) {
-  return Flvjs.canPlayType(srcObj.type);
+Mpegts.canPlaySource = function(srcObj, options) {
+  return Mpegts.canPlayType(srcObj.type);
 };
 
 // Include the version number.
-Flvjs.VERSION = '__VERSION__';
+Mpegts.VERSION = '__VERSION__';
 
-videojs.registerTech('Flvjs', Flvjs);
+videojs.registerTech('Mpegts', Mpegts);
 
-export default Flvjs;
+export default Mpegts;

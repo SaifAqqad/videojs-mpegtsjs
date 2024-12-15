@@ -1,3 +1,8 @@
+# videojs-mpegts
+This is a modified version of [mister-ben/videojs-flvjs](https://github.com/mister-ben/videojs-flvjs) to work with [mpegts.js](https://github.com/xqq/mpegts.js) instead of flv.js
+
+The rest of this README is unmodified
+
 # videojs-flvjs
 
 Video.js tech to use [flv.js](https://github.com/Bilibili/flv.js) for FLV playback using MSE instead of Flash.

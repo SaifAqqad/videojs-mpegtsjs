@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mpegts.js</title>
+</head>
+<body>
+  <script src="node_modules/mpegts.js/dist/mpegts.js"></script>
+  <video id="videoElement" controls></video>
+  <script>
+    if (mpegts.isSupported()) {
+        var videoElement = document.getElementById('videoElement');
+        var mpegtsPlayer = mpegts.createPlayer({
+            type: 'flv',
+            url: 'https://mister-ben.github.io/videojs-flvjs/bbb.flv'
+        });
+        mpegtsPlayer.attachMediaElement(videoElement);
+        mpegtsPlayer.load();
+        //mpegtsPlayer.play();
+    }
+  </script>
+</body>
+</html>
